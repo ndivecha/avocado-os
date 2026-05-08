@@ -1,0 +1,73 @@
+default_target: imx8mp-edgebootpro
+supported_targets:
+  - imx8mp-edgebootpro
+
+distro:
+  release: 2024
+  channel: edge
+
+extensions:
+  avocado-bsp-imx8mp-edgebootpro:
+    version: 2024.1.0
+    release: r0
+    summary: Board support for the EdgeBootPro+ (i.MX 8M Plus, DDR4)
+    description: Board support for the Granite Networks EdgeBootPro+ — i.MX 8M Plus SoC, DDR4 memory, PCA9450 PMIC, managed Ethernet switch, PCIe switch
+    license: Apache-2.0
+    url: https://github.com/ndivecha/avocado-os
+    vendor: Granite Networks <ndivecha@granitenet.com>
+
+    modprobe:
+      - moal
+
+    on_merge:
+      - udevadm control --reload
+      - udevadm trigger --type=subsystems --action=add --settle
+      - udevadm trigger --type=devices --action=add --settle
+
+    overlay: overlay
+
+    packages:
+      # --- Crypto / Security (CAAM) ---
+      kernel-module-caam: '*'
+      kernel-module-caam-jr: '*'
+      kernel-module-caamalg-desc: '*'
+      kernel-module-caamhash-desc: '*'
+      kernel-module-caamkeyblob-desc: '*'
+      kernel-module-authenc: '*'
+      kernel-module-crypto-engine: '*'
+      kernel-module-error: '*'
+      kernel-module-libdes: '*'
+      kernel-module-secvio: '*'
+      kernel-module-fsl-jr-uio: '*'
+      kernel-module-crct10dif-ce: '*'
+      kernel-module-polyval-ce: '*'
+      kernel-module-polyval-generic: '*'
+      # --- CAN bus ---
+      kernel-module-flexcan: '*'
+      kernel-module-can-dev: '*'
+      # --- WiFi (NXP 88W8997 via PCIe switch) ---
+      kernel-module-moal: '*'
+      kernel-module-mlan: '*'
+      kernel-module-rfkill: '*'
+      # --- Bluetooth ---
+      kernel-module-btnxpuart: '*'
+      kernel-module-btusb: '*'
+      kernel-module-btrtl: '*'
+      # --- GPU / NPU (Vivante GC7000UL + VIP9000) ---
+      kernel-module-galcore: '*'
+      # --- Filesystems / Block ---
+      kernel-module-fuse: '*'
+      kernel-module-dm-mod: '*'
+      # --- Compression / zram ---
+      kernel-module-zram: '*'
+      kernel-module-zsmalloc: '*'
+      kernel-module-lz4: '*'
+      kernel-module-lz4-compress: '*'
+      # --- Firmware ---
+      linux-firmware-imx-sdma-imx7d: '*'
+      firmware-nxp-wifi-nxp8997-sdio: '*'
+      firmware-nxp-wifi-nxp8997-pcie: '*'
+      wireless-regdb-static: '*'
+
+sdk:
+  image: docker.io/avocadolinux/sdk:{{ avocado.distro.release }}-{{ avocado.distro.channel }}
