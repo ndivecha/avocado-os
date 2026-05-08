@@ -10,8 +10,8 @@ extensions:
   avocado-bsp-imx8mp-edgebootpro:
     version: 2024.1.0
     release: r0
-    summary: Board support for the EdgeBootPro+ (i.MX 8M Plus, DDR4)
-    description: Board support for the Granite Networks EdgeBootPro+ — i.MX 8M Plus SoC, DDR4 memory, PCA9450 PMIC, managed Ethernet switch, PCIe switch
+    summary: Board support for the edgebootPro+ (i.MX 8M Plus, DDR4)
+    description: Board support for the Granite Networks edgebootPro+ — i.MX 8M Plus SoC, DDR4 memory, PCA9450 PMIC, managed Ethernet switch, PCIe switch
     license: Apache-2.0
     url: https://github.com/ndivecha/avocado-os
     vendor: Granite Networks <ndivecha@granitenet.com>
